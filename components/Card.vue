@@ -1,0 +1,59 @@
+<template>
+  <NuxtLink :to="`/${note.id}`"
+    class="card"
+    :style="{backgroundImage: `url(${note.img})`}">
+    <div class="card__info">
+      <span>{{note.title}}</span>
+      <span>{{note.created_at}}</span>
+    </div>
+  </NuxtLink>
+</template>
+
+<script>
+export default {
+  props: {
+    note: {
+      title: String,
+      created_at: String,
+      img: String,
+      content: String,
+      liked: Boolean
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+
+.card {
+  background-image: url("@/assets/pictures/rat.jpg");
+  min-width: 400px;
+  max-width: 400px;
+  height: 250px;
+  background-position: 50%;
+  position: relative;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  margin: 0 6px;
+
+  &__info {
+    background-color: #09080D;
+    opacity: 90%;
+    color: hsla(245, 20%, 77%, 0.6); //поправить
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 42px;
+    border-radius: 0px 20px 8px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+
+  span {
+    background-color: transparent;
+  }
+}
+
+</style>
