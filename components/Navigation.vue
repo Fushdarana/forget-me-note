@@ -9,16 +9,22 @@
     </div>
     <div
       class="navigation__notes-container"
-      v-for="note in notes">
+    >
       <NavigationNotes
+        v-for="note in notes"
         :note="note"
+        class="navigation__note"
       />
     </div>
-    <img
-      class="navigation__add_icon"
-      @click="() => addNote()"
-      :src="require('@/assets/icons/add.svg')"
-      alt="add"/>
+    <div
+      class="navigation__add_icon">
+      <img
+        @click="() => addNote()"
+        :src="require('@/assets/icons/add.svg')"
+        alt="add"
+        class="addicon"
+      />
+    </div>
   </div>
 </template>
 
@@ -50,9 +56,12 @@ export default {
 
 <style lang="scss" scoped>
 .navigation {
+  position: relative;
+
   &__add_icon {
     cursor: pointer;
   }
+
   &__profile-container {
     display: flex;
     align-items: center;
@@ -65,5 +74,38 @@ export default {
       margin: 5px 10px 5px 5px;
     }
   }
+}
+
+.navigation__notes-container {
+  background-color: rgba(0, 0, 0, 0.25);
+  height: auto;
+  margin: 10px;
+  border-radius: 10px;
+  padding: 10px;
+  transition: all;
+}
+
+.navigation__note {
+  padding: 10px;
+
+}
+
+.navigation__note:hover {
+  color: rgba(99, 55, 195, 1);
+  border: 1px solid rgba(99, 55, 195, 1);
+  border-radius: 10px;
+  transition-duration: 1s;
+}
+
+.navigation__add_icon {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.addicon {
+  position: fixed;
+  bottom: 20px;
 }
 </style>

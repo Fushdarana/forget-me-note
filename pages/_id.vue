@@ -1,8 +1,5 @@
 <template>
   <div class="page">
-    <TextEditor
-      @input="(v) => note.content = v"
-    />
     <div class="page__title-wrapper">
       <input
         class="title-wrapper_title"
@@ -13,28 +10,27 @@
       <img
         @click="() => this.$router.push('/')"
         :src="require('@/assets/icons/close.png')"
-        alt="like"/>
+        alt="close"/>
     </div>
     <div class="page__content-wrapper">
-      <textarea
-        class="content-wrapper__text"
-        v-model="note.content"
-        :placeholder="note.content"
-        @click="() => adjustableTextArea()"
-      />
       <div class="content-wrapper__actions">
-        <div>
-          {{ note.created_at }}</div>
         <button
           @click="() => changeNote()"
           class="actions__btn"
-        >Сохранить
+        >
+          Сохранить
         </button>
         <button
           class="actions__btn"
           @click="() => deleteNote()"
         >
           Удалить
+        </button>
+        <button
+          @click="addCover()"
+          class="actions__btn"
+        >
+          Обложка
         </button>
         <img
           class="actions__like"
@@ -44,20 +40,39 @@
           alt="like"
         />
       </div>
-      <img
-        v-if="note.img"
-        :src="`${note.img}`"
-        alt="img"/>
-      <img
-        v-else
-        :src="require('@/assets/pictures/rat.jpg')"
-        alt="img"/>
+      <div class="redactor_container">
+        <TextEditor
+          :imgURL="note"
+          :value="note.content"
+          @input="(v) => note.content = v"
+          class="textEditor"
+        />
+        <div
+          class="imageBlock">
+          {{ note.created_at }}
+          <div class="img_container">
+            <img
+              :src="note.img"
+              alt="photo"
+              class="img"
+            />
+          </div>
+          <div>
+            <img
+              alt="addImg"
+              :src="require('@/assets/icons/add-image.png')"
+              @click="addImg()"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import TextEditor from "~/components/TextEditor.vue";
+
 export default {
   components: {
     TextEditor
@@ -65,11 +80,20 @@ export default {
   data() {
     return {
       note: {
-        id: 0
+        id: 0,
+        img: ''
       }
     }
   },
   methods: {
+    addImg() {
+      const url = window.prompt('URL')
+      return this.note.img = url
+    },
+    addCover() {
+      const url = window.prompt('URL')
+      return this.note['img'] = url
+    },
     async changeNote() {
       let newVar = await this.$axios.$put('http://localhost:4000/notes/' + this.$route.params.id, this.note);
       console.log(newVar)
@@ -80,19 +104,13 @@ export default {
       await this.$store.dispatch('fetchNotes')
       await this.$router.push('/')
     },
-    adjustableTextArea() {
-      const textarea = document.querySelector('textarea')
-      textarea.addEventListener('keyup', e => {
-        let scHeight = e.target.scrollHeight
-        textarea.style.height = `${scHeight}px`
-      })
-    },
     async setLiked() {
       this.note = await this.$axios.$put('http://localhost:4000/notes/' + this.$route.params.id,
         {
           id: this.note.id,
           title: this.note.title,
           content: this.note.content,
+          created_at: this.note.created_at,
           img: this.note.img,
           liked: !this.note.liked
         })
@@ -108,6 +126,8 @@ export default {
 <style lang="scss">
 
 .page {
+  height: auto;
+
   &__title-wrapper {
     background-color: #09080D;
     border-radius: 0 10px 0 0;
@@ -125,16 +145,16 @@ export default {
   }
 
   &__content-wrapper {
-    height: 100%;
+    height: auto;
     background-color: #09080D;
-
   }
 }
 
 .content-wrapper__actions {
-  display: flex;
-  justify-content: end;
-  margin-right: 30px;
+  margin-right: 10px;
+  text-align: end;
+  padding: 10px;
+
   .actions__btn {
     background-color: transparent;
     color: rgba(186, 184, 208, 0.4);
@@ -176,4 +196,19 @@ export default {
 .active:hover {
   filter: none;
 }
+
+.redactor_container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.img_container {
+  margin-top: 10px;
+  width: 500px;
+  height: auto;
+  max-height: 700px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
 </style>

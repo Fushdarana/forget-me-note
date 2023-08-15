@@ -1,10 +1,10 @@
 <template>
   <NuxtLink :to="`/${note.id}`"
-    class="card"
-    :style="{backgroundImage: `url(${note.img})`}">
+            class="card"
+            :style="{backgroundImage: `url(${note.img})`}">
     <div class="card__info">
-      <span>{{note.title}}</span>
-      <span>{{note.created_at}}</span>
+      <span>{{ note.title }}</span>
+      <span>{{ note.created_at }}</span>
     </div>
   </NuxtLink>
 </template>
@@ -26,10 +26,9 @@ export default {
 <style lang="scss" scoped>
 
 .card {
-  background-image: url("@/assets/pictures/rat.jpg");
-  min-width: 400px;
-  max-width: 400px;
-  height: 250px;
+  min-width: 450px;
+  max-width: 450px;
+  height: 280px;
   background-position: 50%;
   position: relative;
   background-repeat: no-repeat;

@@ -39,17 +39,20 @@ $dark-grey: rgba(54, 52, 59, 1);
 }
 
 .main {
+  min-height: 100vh;
   display: flex;
 
   &__navigation {
+    height: auto;
     width: 15%;
     background-color: $light-grey;
+    background-attachment: scroll;
   }
 
   &__content-holder {
+    height: auto;
     position: relative;
     width: 85%;
-    height: 100vh;
     background-color: $dark-grey;
   }
 }
@@ -60,7 +63,7 @@ $dark-grey: rgba(54, 52, 59, 1);
   }
 
   &_img {
-    position: absolute;
+    position: fixed;
     bottom: 10px;
     right: 10px;
   }

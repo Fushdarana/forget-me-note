@@ -1,13 +1,15 @@
 <template>
   <NuxtLink :to="`/${note.id}`" class="note">
+    <img
+      v-if="note.liked"
+      :src="require('@/assets/icons/likeicon.png')"
+      alt="like"
+      :style="{'max-height': '20px', 'margin-right': '5px'}"
+    />
     <span>
     {{ note.title }}
     </span>
-    <img
-      v-if="note.liked"
-      :src="require('@/assets/icons/passion.png')"
-      alt="like"
-    />
+
   </NuxtLink>
 </template>
 
@@ -26,4 +28,6 @@ export default {
 .note {
   display: flex;
 }
+
+
 </style>

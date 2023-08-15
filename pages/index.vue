@@ -1,9 +1,14 @@
 <template>
   <div class="container">
     <div class="container__content">
-      <span>Заметки</span>
+      <div
+        :style="{ 'text-align': 'center', 'font-size': '20px', 'padding-top': '20px' }">
+        Заметки
+      </div>
       <div class="content__group_wrapper">
-        <span class="content__group-name">Группа</span>
+        <span class="content__group-name">
+          Группа
+        </span>
         <div class="content__group">
           <img
             class="group_scrollLeft"
@@ -26,6 +31,20 @@
           />
         </div>
       </div>
+      <div class="content__favs_wrapper">
+        <span class="content__group-name">
+          Избранное
+        </span>
+        <div class="content__favs">
+          <div class="container__cards_favs">
+            <Card
+              v-for="fav of favs"
+              :key="fav.id"
+              :note="fav"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -34,6 +53,9 @@
 export default {
   name: 'IndexPage',
   computed: {
+    favs() {
+      return this.$store.getters['favs']
+    },
     notes() {
       return this.$store.getters['notes']
     }
@@ -59,7 +81,7 @@ export default {
     background-color: rgba(9, 8, 13, 1);
     height: 100%;
 
-    .content__group{
+    .content__group {
       display: flex;
       padding: 15px;
     }
@@ -69,7 +91,13 @@ export default {
       margin: 15px 65px;
     }
 
-    .content__group_wrapper{
+    .content__group_wrapper {
+      padding-top: 30px;
+    }
+
+    .content__favs_wrapper {
+      display: flex;
+      flex-wrap: wrap;
       padding-top: 30px;
     }
 
@@ -87,6 +115,13 @@ export default {
     }
   }
 
+  .content__favs {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 75px;
+    margin-bottom: 30px;
+  }
+
   &__cards {
     display: flex;
     overflow-x: scroll;
@@ -97,7 +132,11 @@ export default {
     display: none;
   }
 
-
+  .container__cards_favs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
 
 </style>
