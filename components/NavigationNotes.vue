@@ -1,5 +1,9 @@
 <template>
-  <NuxtLink :to="`/${note.id}`" class="note">
+  <NuxtLink
+    :to="`/${note.id}`"
+    :style="{'display' : 'flex'}"
+    class="nav-note"
+  >
     <img
       v-if="note.liked"
       :src="require('@/assets/icons/likeicon.png')"
@@ -23,11 +27,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.note {
-  display: flex;
-}
-
-
-</style>

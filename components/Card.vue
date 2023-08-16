@@ -24,6 +24,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/style/variables";
 
 .card {
   min-width: 450px;
@@ -38,12 +39,12 @@ export default {
   &__info {
     background-color: #09080D;
     opacity: 90%;
-    color: hsla(245, 20%, 77%, 0.6); //поправить
+    color: $font-basic;
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 42px;
-    border-radius: 0px 20px 8px 8px;
+    border-radius: 0 20px 8px 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;

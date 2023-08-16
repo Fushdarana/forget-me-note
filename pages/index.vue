@@ -6,17 +6,16 @@
         Заметки
       </div>
       <div class="content__group_wrapper">
-        <span class="content__group-name">
-          Группа
-        </span>
+        <span class="content__title">Группа</span>
         <div class="content__group">
+          <div class=""></div>
           <img
             class="group_scrollLeft"
             @click="() => scrollTo('LEFT')"
             :src="require('@/assets/icons/arrow.svg')"
             alt="btn"
           />
-          <div class="container__cards">
+          <div class="group__cards-container">
             <Card
               v-for="note of notes"
               :key="note.id"
@@ -32,17 +31,14 @@
         </div>
       </div>
       <div class="content__favs_wrapper">
-        <span class="content__group-name">
-          Избранное
-        </span>
-        <div class="content__favs">
-          <div class="container__cards_favs">
-            <Card
-              v-for="fav of favs"
-              :key="fav.id"
-              :note="fav"
-            />
-          </div>
+        <span class="content__title">Избранное</span>
+        <div class="favs__cards-container">
+          <Card
+            v-for="fav of favs"
+            :key="fav.id"
+            :note="fav"
+            :style="{'margin':'5px'}"
+          />
         </div>
       </div>
     </div>
@@ -62,7 +58,7 @@ export default {
   },
   methods: {
     scrollTo(direction) {
-      const el = document.querySelector('.container__cards')
+      const el = document.querySelector('.group__cards-container')
       if (direction === 'LEFT') {
         el.scrollLeft -= el.clientWidth
       } else {
@@ -74,68 +70,60 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/style/variables";
+
 .container {
   height: 100%;
 
   &__content {
-    background-color: rgba(9, 8, 13, 1);
+    background-color: $custom-black;
     height: 100%;
 
-    .content__group {
-      display: flex;
-      padding: 15px;
-    }
-
-    .content__group-name {
-      font-size: 20px;
-      margin: 15px 65px;
-    }
-
     .content__group_wrapper {
-      padding-top: 30px;
+      padding-top: 15px;
+
+      .content__group {
+        display: flex;
+        padding: 20px 20px;
+
+        .group_scrollLeft {
+          margin-right: 15px;
+          margin-left: 15px;
+          cursor: pointer;
+        }
+
+        .group__cards-container {
+          display: flex;
+          overflow-x: scroll;
+          scroll-behavior: smooth;
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+        }
+
+        .group_scrollRight {
+          transform: scaleX(-1);
+          margin-left: 15px;
+          margin-right: 15px;
+          cursor: pointer;
+        }
+      }
     }
 
     .content__favs_wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      padding-top: 30px;
-    }
-
-    .group_scrollLeft {
-      margin-right: 15px;
-      margin-left: 15px;
-      cursor: pointer;
-    }
-
-    .group_scrollRight {
-      transform: scaleX(-1);
-      margin-left: 15px;
-      margin-right: 15px;
-      cursor: pointer;
+      .favs__cards-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding-top: 15px;
+      }
     }
   }
 
-  .content__favs {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0 75px;
-    margin-bottom: 30px;
-  }
-
-  &__cards {
-    display: flex;
-    overflow-x: scroll;
-    scroll-behavior: smooth;
-  }
-
-  &__cards::-webkit-scrollbar {
-    display: none;
-  }
-
-  .container__cards_favs {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+  .content__title {
+    font-size: 20px;
+    margin: 65px;
   }
 }
 

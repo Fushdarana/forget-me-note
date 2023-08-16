@@ -2,68 +2,65 @@
   <div class="page">
     <div class="page__title-wrapper">
       <input
-        class="title-wrapper_title"
+        class="title"
         type="text"
         v-model="note.title"
-        :placeholder="note.title"
-      />
+        :placeholder="note.title"/>
       <img
         @click="() => this.$router.push('/')"
         :src="require('@/assets/icons/close.png')"
+        :style="{'cursor':'pointer'}"
         alt="close"/>
     </div>
     <div class="page__content-wrapper">
-      <div class="content-wrapper__actions">
-        <button
-          @click="() => changeNote()"
-          class="actions__btn"
-        >
-          Сохранить
-        </button>
-        <button
-          class="actions__btn"
-          @click="() => deleteNote()"
-        >
-          Удалить
-        </button>
-        <button
-          @click="addCover()"
-          class="actions__btn"
-        >
-          Обложка
-        </button>
-        <img
-          class="actions__like"
-          :class="{ active: !this.note.liked }"
-          :src="require('@/assets/icons/passion.png')"
-          @click="() => setLiked()"
-          alt="like"
-        />
-      </div>
-      <div class="redactor_container">
-        <TextEditor
-          :imgURL="note"
-          :value="note.content"
-          @input="(v) => note.content = v"
-          class="textEditor"
-        />
+      <TextEditor
+        :imgURL="note"
+        :value="note.content"
+        @input="(v) => note.content = v"/>
+      <div
+        class="attachments-actions__container">
+        <div class="actions">
+          <button
+            @click="() => changeNote()"
+            class="actions__btn">
+            Сохранить
+          </button>
+          <button
+            class="actions__btn"
+            @click="() => deleteNote()">
+            Удалить
+          </button>
+          <img
+            class="actions__like"
+            :class="{ active: !this.note.liked }"
+            :src="require('@/assets/icons/passion.png')"
+            @click="() => setLiked()"
+            alt="like"/>
+        </div>
         <div
-          class="imageBlock">
+          class="attachments_actions"
+          :style="{'display':'flex', 'align-items':'center'}">
           {{ note.created_at }}
-          <div class="img_container">
-            <img
-              :src="note.img"
-              alt="photo"
-              class="img"
-            />
-          </div>
-          <div>
-            <img
-              alt="addImg"
-              :src="require('@/assets/icons/add-image.png')"
-              @click="addImg()"
-            />
-          </div>
+          <img
+            :style="{'margin-left':'5px'}"
+            v-show="!this.note.img"
+            alt="addImg"
+            :src="require('@/assets/icons/add-image.png')"
+            @click="addImg()"/>
+          <img
+            v-show="this.note.img"
+            @click="() => deleteImg()"
+            :src="require('@/assets/icons/close.png')"
+            :style="{'cursor':'pointer', 'margin-left':'5px'}"
+            alt="deleteImg"/>
+        </div>
+        <div
+          v-show="this.note.img"
+          class="img_container">
+          <img
+            :src="note.img"
+            alt="img"
+            class="client-img"/>
         </div>
       </div>
     </div>
@@ -79,24 +76,23 @@ export default {
   },
   data() {
     return {
-      note: {
-        id: 0,
-        img: ''
-      }
+      note: {}
     }
   },
   methods: {
     addImg() {
-      const url = window.prompt('URL')
-      return this.note.img = url
+      let url = window.prompt('Вставьте фдрес изображения')
+      if (this.note.img === '') {
+        if (url) {
+          return this.note.img = url
+        }
+      }
     },
-    addCover() {
-      const url = window.prompt('URL')
-      return this.note['img'] = url
+    deleteImg() {
+      this.note.img = ''
     },
     async changeNote() {
-      let newVar = await this.$axios.$put('http://localhost:4000/notes/' + this.$route.params.id, this.note);
-      console.log(newVar)
+      await this.$axios.$put('http://localhost:4000/notes/' + this.$route.params.id, this.note);
       await this.$store.dispatch('fetchNotes')
     },
     async deleteNote() {
@@ -124,19 +120,20 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/assets/style/variables";
 
 .page {
   height: auto;
 
   &__title-wrapper {
-    background-color: #09080D;
+    background-color: $custom-black;
     border-radius: 0 10px 0 0;
     width: 315px;
     display: flex;
     justify-content: space-around;
     padding: 10px;
 
-    .title-wrapper_title {
+    .title {
       border: none;
       outline: none;
       width: 315px;
@@ -146,42 +143,64 @@ export default {
 
   &__content-wrapper {
     height: auto;
-    background-color: #09080D;
+    background-color: $custom-black;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+
+    .attachments-actions__container {
+      .actions {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        margin-right: 10px;
+        padding: 10px;
+
+        .actions__btn {
+          background-color: transparent;
+          color: $font-basic;
+          box-shadow: none;
+          border-radius: 5px;
+          cursor: pointer;
+          border: none;
+          margin: 5px;
+
+          &:hover {
+            color: $font-bright;
+          }
+        }
+      }
+
+      .addImg_container {
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .img_container {
+        position: relative;
+        margin-top: 10px;
+        max-width: 500px;
+        width: 100%;
+        max-height: 500px;
+        height: 50vh;
+        overflow: hidden;
+        border-radius: 10px;
+
+        .client-img {
+          object-fit: cover;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
   }
-}
-
-.content-wrapper__actions {
-  margin-right: 10px;
-  text-align: end;
-  padding: 10px;
-
-  .actions__btn {
-    background-color: transparent;
-    color: rgba(186, 184, 208, 0.4);
-    box-shadow: none;
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
-    margin: 5px;
-  }
-
-  .actions__btn:hover {
-    color: #BAB8D0; //поправить
-
-  }
-}
-
-.content-wrapper__text {
-  background-color: #09080D; //поправить
-  resize: none;
-  width: 700px;
-  padding: 20px;
-  outline: none;
-  border: none;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  overflow: hidden;
-
 }
 
 .actions__like:hover {
@@ -190,25 +209,10 @@ export default {
 }
 
 .active {
-  filter: invert(54%) sepia(12%) saturate(71%) hue-rotate(315deg) brightness(93%) contrast(77%)
-}
+  filter: invert(54%) sepia(12%) saturate(71%) hue-rotate(315deg) brightness(93%) contrast(77%);
 
-.active:hover {
-  filter: none;
+  &:hover {
+    filter: none;
+  }
 }
-
-.redactor_container {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-}
-
-.img_container {
-  margin-top: 10px;
-  width: 500px;
-  height: auto;
-  max-height: 700px;
-  overflow: hidden;
-  border-radius: 10px;
-}
-
 </style>
