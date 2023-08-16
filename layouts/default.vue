@@ -15,12 +15,16 @@
         alt="menu"
         @click="handleNavMobile()"
         :src="require('@/assets/icons/menu.png')">
-      <div
+        <div
         class="burger__menu_notes"
         :class="{ opened: isOpened }">
         <NavigationNotes
           v-for="note in notes"
-          :note="note"/>
+          :note="note"
+          class="burger__menu_note"
+          :style="{'padding':'10px'}"/>
+        <AddNote
+        :style="{'width': '35px'}"/>
         <img
           @click="closeMenu()"
           :src="require('@/assets/icons/close.png')"
@@ -37,6 +41,7 @@
 
 <script>
 import NavigationNotes from "@/components/NavigationNotes.vue"
+import AddNote from "@/components/AddNote.vue"
 export default {
   async fetch() {
     await this.$store.dispatch('fetchNotes')
@@ -128,9 +133,9 @@ export default {
       display: none;
       @media (max-width: 1200px) {
         display: block;
+        height: 70px;
         padding: 20px;
         cursor: pointer;
-
       }
     }
   }

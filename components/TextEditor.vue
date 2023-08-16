@@ -102,6 +102,10 @@
         :src="require('@/assets/icons/youtube.png')"
         @click="addVideo"
       />
+      <img
+        alt="addimg"
+        :src="require('@/assets/icons/add-image.png')"
+        @click="addImage()"/>
     </div>
     <editor-content
       :editor="editor"/>
@@ -129,6 +133,7 @@ import Heading from "@tiptap/extension-heading"
 import OrderedList from "@tiptap/extension-ordered-list"
 import Strike from "@tiptap/extension-strike"
 import BulletList from "@tiptap/extension-bullet-list"
+import Image from "@tiptap/extension-image"
 
 export default {
   components: {
@@ -150,16 +155,22 @@ export default {
   },
 
   methods: {
+    addImage() {
+      const url = window.prompt('URL')
+      if (url) {
+        this.editor.chain().focus().setImage({ src: url }).run()
+      }
+    },
     addVideo() {
       const url = prompt('Enter YouTube URL')
 
+      if(url) {
       this.editor.commands.setYoutubeVideo({
         src: url,
         width: Math.max(320, parseInt(this.width, 10)) || 640,
         height: Math.max(180, parseInt(this.height, 10)) || 480,
       })
-    },
-
+    }},
   },
 
   watch: {
@@ -189,6 +200,11 @@ export default {
           levels: [1, 2]
         }),
         Highlight.configure({multicolor: true}),
+        Image.configure({
+          HTMLAttributes: {
+            class: 'client-img',
+          },
+        }),
         Italic,
         OrderedList.configure({
           itemTypeName: 'listItem',
@@ -206,8 +222,8 @@ export default {
         Underline,
         Youtube.configure({
           inline: false,
-          width: 480,
-          height: 320,
+          width: 500,
+          height: 500,
           autoplay: true
         })
       ],
@@ -227,7 +243,8 @@ export default {
 @import "@/assets/style/variables";
 
 .redactor {
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   padding: 10px;
   overflow: hidden;
 
@@ -252,6 +269,7 @@ export default {
     }
     @media (max-width: 992px) {
       width: 100%;
+      flex-wrap: wrap;
     }
 
     .tools__element {
@@ -282,6 +300,15 @@ export default {
 #input::-webkit-color-swatch {
   border-radius: 20%;
   border: none;
+}
+
+.client-img {
+  object-fit: cover;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  max-height: 500px;
+  padding: 10px;
 }
 
 </style>

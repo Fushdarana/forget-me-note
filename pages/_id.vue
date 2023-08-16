@@ -18,7 +18,7 @@
         :value="note.content"
         @input="(v) => note.content = v"/>
       <div
-        class="attachments-actions__container">
+        class="actions__container">
         <div class="actions">
           <button
             @click="() => changeNote()"
@@ -30,37 +30,17 @@
             @click="() => deleteNote()">
             Удалить
           </button>
+          <button
+            @click="() => addCover()"
+            class="actions__btn">
+            Обложка
+          </button>
           <img
             class="actions__like"
             :class="{ active: !this.note.liked }"
             :src="require('@/assets/icons/passion.png')"
             @click="() => setLiked()"
             alt="like"/>
-        </div>
-        <div
-          class="attachments_actions"
-          :style="{'display':'flex', 'align-items':'center'}">
-          {{ note.created_at }}
-          <img
-            :style="{'margin-left':'5px'}"
-            v-show="!this.note.img"
-            alt="addImg"
-            :src="require('@/assets/icons/add-image.png')"
-            @click="addImg()"/>
-          <img
-            v-show="this.note.img"
-            @click="() => deleteImg()"
-            :src="require('@/assets/icons/close.png')"
-            :style="{'cursor':'pointer', 'margin-left':'5px'}"
-            alt="deleteImg"/>
-        </div>
-        <div
-          v-show="this.note.img"
-          class="img_container">
-          <img
-            :src="note.img"
-            alt="img"
-            class="client-img"/>
         </div>
       </div>
     </div>
@@ -80,16 +60,11 @@ export default {
     }
   },
   methods: {
-    addImg() {
-      let url = window.prompt('Вставьте фдрес изображения')
-      if (this.note.img === '') {
-        if (url) {
-          return this.note.img = url
+    addCover() {
+      const url = window.prompt('URL')
+      if (url) {
+        this.note.img = url
         }
-      }
-    },
-    deleteImg() {
-      this.note.img = ''
     },
     async changeNote() {
       await this.$axios.$put('http://localhost:4000/notes/' + this.$route.params.id, this.note);
@@ -145,20 +120,25 @@ export default {
     height: auto;
     background-color: $custom-black;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 80% 20%;
 
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
       display: block;
     }
 
-    .attachments-actions__container {
+    .actions__container {
+      height: auto;
       .actions {
         display: flex;
         justify-content: end;
         align-items: center;
         margin-right: 10px;
         padding: 10px;
+        height: auto;
 
+        @media (max-width: 992px) {
+          justify-content: start;
+        }
         .actions__btn {
           background-color: transparent;
           color: $font-basic;
@@ -171,32 +151,6 @@ export default {
           &:hover {
             color: $font-bright;
           }
-        }
-      }
-
-      .addImg_container {
-        padding: 10px;
-        width: 100%;
-        text-align: center;
-      }
-
-      .img_container {
-        position: relative;
-        margin-top: 10px;
-        max-width: 500px;
-        width: 100%;
-        max-height: 500px;
-        height: 50vh;
-        overflow: hidden;
-        border-radius: 10px;
-
-        .client-img {
-          object-fit: cover;
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
-          height: 100%;
         }
       }
     }

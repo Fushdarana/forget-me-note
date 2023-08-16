@@ -14,18 +14,22 @@
         class="navigation__note"
       />
     </div>
+
     <div class="navigation__add_icon">
-      <img
-        @click="() => addNote()"
-        :src="require('@/assets/icons/add.svg')"
-        alt="add"
-        class="addicon"
-      />
+      <div class="test"><AddNote /></div>
+
+<!--      <img-->
+<!--        @click="() => addNote()"-->
+<!--        :src="require('@/assets/icons/add.svg')"-->
+<!--        alt="add"-->
+<!--        class="addicon"-->
+<!--      />-->
     </div>
   </div>
 </template>
 
 <script>
+import AddNote from "@/components/AddNote.vue"
 export default {
   computed: {
     notes() {
@@ -101,7 +105,7 @@ export default {
     display: flex;
     justify-content: center;
 
-    .addicon {
+    .test{
       position: fixed;
       bottom: 20px;
     }

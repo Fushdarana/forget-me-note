@@ -36,6 +36,10 @@ export default {
   border-radius: 10px;
   margin: 0 6px;
 
+  @media (max-width: 768px) {
+    min-width: 300px;
+  }
+
   &__info {
     background-color: #09080D;
     opacity: 90%;
