@@ -1,7 +1,8 @@
 <template>
-  <NuxtLink :to="`/${note.id}`"
-            class="card"
-            :style="{backgroundImage: `url(${note.img})`}">
+  <NuxtLink
+    :to="`/${note.id}`"
+    class="card"
+    :style="{backgroundImage: `url(${note.img})`}">
     <div class="card__info">
       <span>{{ note.title }}</span>
       <span>{{ note.created_at }}</span>

@@ -2,7 +2,6 @@
   <NuxtLink
     :to="`/${note.id}`"
     :style="{'display' : 'flex'}"
-    class="nav-note"
   >
     <img
       v-if="note.liked"

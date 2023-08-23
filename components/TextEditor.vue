@@ -158,19 +158,20 @@ export default {
     addImage() {
       const url = window.prompt('URL')
       if (url) {
-        this.editor.chain().focus().setImage({ src: url }).run()
+        this.editor.chain().focus().setImage({src: url}).run()
       }
     },
     addVideo() {
       const url = prompt('Enter YouTube URL')
 
-      if(url) {
-      this.editor.commands.setYoutubeVideo({
-        src: url,
-        width: Math.max(320, parseInt(this.width, 10)) || 640,
-        height: Math.max(180, parseInt(this.height, 10)) || 480,
-      })
-    }},
+      if (url) {
+        this.editor.commands.setYoutubeVideo({
+          src: url,
+          width: Math.max(320, parseInt(this.width, 10)) || 640,
+          height: Math.max(180, parseInt(this.height, 10)) || 480,
+        })
+      }
+    },
   },
 
   watch: {

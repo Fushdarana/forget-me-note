@@ -15,15 +15,10 @@
       />
     </div>
 
-    <div class="navigation__add_icon">
-      <div class="test"><AddNote /></div>
-
-<!--      <img-->
-<!--        @click="() => addNote()"-->
-<!--        :src="require('@/assets/icons/add.svg')"-->
-<!--        alt="add"-->
-<!--        class="addicon"-->
-<!--      />-->
+    <div class="navigation__add">
+      <div class="add_icon">
+        <AddNote />
+      </div>
     </div>
   </div>
 </template>
@@ -99,13 +94,13 @@ export default {
       }
     }
   }
-  &__add_icon {
+  &__add {
     position: absolute;
     width: 100%;
     display: flex;
     justify-content: center;
 
-    .test{
+    .add_icon{
       position: fixed;
       bottom: 20px;
     }

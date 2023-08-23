@@ -9,27 +9,27 @@
         ForgetMe<strong class="content-holder_highlight">NOTE</strong>
       </NuxtLink>
       <div
-      :style="{'display':'flex'}">
-      <img
-        class="burger__menu"
-        alt="menu"
-        @click="handleNavMobile()"
-        :src="require('@/assets/icons/menu.png')">
-        <div
-        class="burger__menu_notes"
-        :class="{ opened: isOpened }">
-        <NavigationNotes
-          v-for="note in notes"
-          :note="note"
-          class="burger__menu_note"
-          :style="{'padding':'10px'}"/>
-        <AddNote
-        :style="{'width': '35px'}"/>
+        :style="{'display':'flex'}">
         <img
-          @click="closeMenu()"
-          :src="require('@/assets/icons/close.png')"
-          alt="close">
-      </div>
+          class="burger__menu"
+          alt="menu"
+          @click="handleNavMobile()"
+          :src="require('@/assets/icons/menu.png')">
+        <div
+          class="burger__menu_notes"
+          :class="{ opened: isOpened }">
+          <NavigationNotes
+            v-for="note in notes"
+            :note="note"
+            class="burger__menu_note"
+            :style="{'padding':'10px'}"/>
+          <AddNote
+            :style="{'width': '35px'}"/>
+          <img
+            @click="closeMenu()"
+            :src="require('@/assets/icons/close.png')"
+            alt="close">
+        </div>
       </div>
       <Nuxt class="content-holder__children"/>
       <img
@@ -42,6 +42,7 @@
 <script>
 import NavigationNotes from "@/components/NavigationNotes.vue"
 import AddNote from "@/components/AddNote.vue"
+
 export default {
   async fetch() {
     await this.$store.dispatch('fetchNotes')
@@ -140,6 +141,7 @@ export default {
     }
   }
 }
+
 .burger__menu_notes {
   display: none;
 }

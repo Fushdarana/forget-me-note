@@ -1,0 +1,45 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "title": "Учебная практика",
+      "content": "<p></p><img class=\"client-img\" src=\"https://i.pinimg.com/564x/cc/78/f9/cc78f96a41d68efaae6831e527b6453d.jpg\"><img class=\"client-img\" src=\"https://i.pinimg.com/564x/ec/46/5c/ec465cad80ec78bcfafa4e781ff42d7f.jpg\">",
+      "img": [
+        "https://sun9-36.userapi.com/impg/lWzXVsmVl0l3jl5jbt5Ey6oFduL4p5cu-kW_vA/DbUSeSpvaxg.jpg?size=906x1340&quality=95&sign=3acbe58745c943a73544260f28fff902&type=album",
+        "https://i.pinimg.com/564x/4d/9d/b7/4d9db786850c49594375dcf71f6eec85.jpg"
+      ],
+      "liked": false
+    },
+    {
+      "id": 4,
+      "title": "Идеи для дома",
+      "content": "<ol><li><p><mark data-color=\"#7a3ea3\" style=\"background-color: #7a3ea3; color: inherit\">Введите </mark>Ваш <span style=\"color: #7070a9\">текст…</span></p><img class=\"client-img\" src=\"https://i.pinimg.com/564x/ec/46/5c/ec465cad80ec78bcfafa4e781ff42d7f.jpg\"></li></ol><img class=\"client-img\" src=\"https://i.pinimg.com/564x/21/32/61/21326103d02e21b75acf86b4d915d415.jpg\"><div data-youtube-video=\"\"><iframe width=\"640\" height=\"480\" allowfullscreen=\"true\" autoplay=\"true\" disablekbcontrols=\"false\" enableiframeapi=\"false\" endtime=\"0\" ivloadpolicy=\"0\" loop=\"false\" modestbranding=\"false\" origin=\"\" playlist=\"\" src=\"https://www.youtube.com/embed/JLs8-bWuHyk?autoplay=1\" start=\"0\"></iframe></div>",
+      "img": "https://i.pinimg.com/564x/21/32/61/21326103d02e21b75acf86b4d915d415.jpg",
+      "liked": false
+    },
+    {
+      "id": 9,
+      "title": "Мои планы",
+      "content": "<p></p>",
+      "created_at": "2023-08-11 18:10",
+      "img": "https://sun9-38.userapi.com/impf/tC5Cbp0H3aUiVzZ66f2Dj4EHmz5IICL9a-DzIQ/o1tVWkNCNKM.jpg?size=1000x667&quality=96&sign=7db762900926c6a336b45d9c87a4506d&type=album",
+      "liked": false
+    },
+    {
+      "id": 10,
+      "title": "Творчесво",
+      "content": "<p>Введите Ваш текст...</p><p><img class=\"client-image\" src=\"https://sun9-30.userapi.com/impg/-aVUOVJKTYxIyml008qEFqx5DcnSeFz4RWM3PQ/7jPv0AbWSjU.jpg?size=564x1002&amp;quality=95&amp;sign=ce2d45c5f2fc2bc4faacbc0737d29e05&amp;type=album\"></p>",
+      "created_at": "2023-08-11 18:19",
+      "img": "https://sun9-30.userapi.com/impg/-aVUOVJKTYxIyml008qEFqx5DcnSeFz4RWM3PQ/7jPv0AbWSjU.jpg?size=564x1002&quality=95&sign=ce2d45c5f2fc2bc4faacbc0737d29e05&type=album",
+      "liked": true
+    },
+    {
+      "id": 11,
+      "title": "Новая заметка",
+      "content": "<p>Введите Ваш текст...</p><p><img class=\"client-image\" src=\"https://i.pinimg.com/564x/ca/bb/a2/cabba2f6d3b494132b7d4e45833f3fd7.jpg\"></p>",
+      "created_at": "2023-08-14 14:4",
+      "img": "https://i.pinimg.com/564x/9d/28/8a/9d288a8248614474af643b487dc117e0.jpg",
+      "liked": true
+    }
+  ]
+}
